@@ -59,6 +59,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="Scripts" />
+    <Folder Include="Publish Profiles" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\RoomTypes.sql" />
@@ -68,5 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Publish Profiles\HotelAppDB.publish.xml" />
   </ItemGroup>
 </Project>
