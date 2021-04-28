@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HotelAppLibrary.Data
 {
-    public class SqlData
+    public class SqlData : IDatabaseData
     {
         private readonly ISqlDataAccess _db;
         private const string connectionStringName = "SqlDb";
@@ -31,13 +31,13 @@ namespace HotelAppLibrary.Data
                               int roomTypeId)
         {
             GuestModel guest = _db.LoadData<GuestModel, dynamic>("dbo.spGuests_Insert",
-                                                                 new 
+                                                                 new
                                                                  { firstName, lastName },
                                                                  connectionStringName,
                                                                  true).First();
 
             RoomTypeModel roomType = _db.LoadData<RoomTypeModel, dynamic>("select * from dbo.RoomTypes where Id = @Id",
-                                                               new 
+                                                               new
                                                                { roomTypeId },
                                                                connectionStringName,
                                                                true).First();
@@ -49,12 +49,13 @@ namespace HotelAppLibrary.Data
                                                                  connectionStringName,
                                                                  true);
             _db.SaveData("dbo.spBookings_Insert",
-                         new 
-                         { 
-                             roomId = availableRooms.First().Id, 
-                             guestId = guest.Id, startDate = startDate, 
-                             endDate = endDate, 
-                             totalCost = timeStaying.Days * roomType.Price, 
+                         new
+                         {
+                             roomId = availableRooms.First().Id,
+                             guestId = guest.Id,
+                             startDate = startDate,
+                             endDate = endDate,
+                             totalCost = timeStaying.Days * roomType.Price,
                          },
                          connectionStringName,
                          true);
@@ -62,10 +63,10 @@ namespace HotelAppLibrary.Data
 
         public List<BookingFullModel> SearchBookings(string lastName)
         {
-           return _db.LoadData<BookingFullModel, dynamic>("dbo.spBookings_Search",
-                                                    new { lastName, startDate = DateTime.Now.Date},
-                                                    connectionStringName,
-                                                    true); 
+            return _db.LoadData<BookingFullModel, dynamic>("dbo.spBookings_Search",
+                                                     new { lastName, startDate = DateTime.Now.Date },
+                                                     connectionStringName,
+                                                     true);
         }
 
         public void CheckInGuest(int bookingId)
