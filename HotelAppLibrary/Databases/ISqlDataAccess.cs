@@ -8,6 +8,7 @@ namespace HotelAppLibrary.Databases
                                U parameters,
                                string connectionStringName,
                                bool isStoredProcedure = false);
+
         void SaveData<T>(string sqlStatement,
                          T parameters,
                          string connectionStringName,

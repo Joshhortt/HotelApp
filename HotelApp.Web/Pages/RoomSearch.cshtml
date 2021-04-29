@@ -1,23 +1,22 @@
 ﻿@page
-@model HotelApp.Web.Pages.RoomSearchModel
+@model HotelApp.Web.RoomSearchModel
 @{
 	ViewData["Title"] = "Room Search";
-
 }
+
 <h1>Room Search</h1>
 
 <form method="post">
 	<div class="form-group">
-		<label asp-for="@Model.StartDate" />
+		<label asp-for="@Model.StartDate"></label>
 		<input asp-for="@Model.StartDate" />
 	</div>
 	<div class="form-group">
-		<label asp-for="@Model.EndDate" />
+		<label asp-for="@Model.EndDate"></label>
 		<input asp-for="@Model.EndDate" />
 	</div>
 	<button type="submit" class="btn btn-primary">Search</button>
 </form>
-
 
 @if (Model.AvailableRoomTypes?.Count > 0)
 {
@@ -40,7 +39,11 @@
 						@room.Description
 					</td>
 					<td>@string.Format("{0:C}", room.Price)</td>
-					<td><a href="">Book Now</a></td>
+					<td>
+						<a asp-page="/BookRoom" asp-route-roomtypeid="@room.Id"
+						   asp-route-startdate="@Model.StartDate.ToShortDateString()"
+						   asp-route-enddate="@Model.EndDate.ToShortDateString()">Book Now</a>
+					</td>
 				</tr>
 			}
 		</tbody>

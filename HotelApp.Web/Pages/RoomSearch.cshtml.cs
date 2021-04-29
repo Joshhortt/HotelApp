@@ -8,15 +8,15 @@ using HotelAppLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HotelApp.Web.Pages
+namespace HotelApp.Web
 {
     public class RoomSearchModel : PageModel
     {
-		private readonly IDatabaseData _db;
+        private readonly IDatabaseData _db;
 
-		[DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         [BindProperty(SupportsGet = true)]
-		public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime StartDate { get; set; } = DateTime.Now;
 
         [DataType(DataType.Date)]
         [BindProperty(SupportsGet = true)]
@@ -29,8 +29,8 @@ namespace HotelApp.Web.Pages
 
         public RoomSearchModel(IDatabaseData db)
         {
-			_db = db;
-		}
+            _db = db;
+        }
 
         public void OnGet()
         {
@@ -42,7 +42,12 @@ namespace HotelApp.Web.Pages
 
         public IActionResult OnPost()
         {
-            return RedirectToPage(new { SearchEnabled = true, StartDate, EndDate });
+            return RedirectToPage(new
+            {
+                SearchEnabled = true,
+                StartDate = StartDate.ToString("yyyy-MM-dd"),
+                EndDate = EndDate.ToString("yyyy-MM-dd")
+            });
         }
     }
 }

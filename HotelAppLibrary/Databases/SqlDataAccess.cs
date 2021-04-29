@@ -43,7 +43,6 @@ namespace HotelAppLibrary.Databases
                                 string connectionStringName,
                                 bool isStoredProcedure = false)
         {
-
             string connectionString = _config.GetConnectionString(connectionStringName);
             CommandType commandType = CommandType.Text;
 
@@ -55,9 +54,7 @@ namespace HotelAppLibrary.Databases
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Execute(sqlStatement, parameters, commandType: commandType);
-
             }
         }
     }
 }
-

@@ -6,13 +6,13 @@ begin
 	set nocount on;
 
 	if not exists (select 1 from dbo.Guests where FirstName = @firstName and LastName = @lastName)
-		begin
-		insert into dbo.Guests(FirstName, LastName)
+	begin
+		insert into dbo.Guests (FirstName, LastName)
 		values (@firstName, @lastName);
-		end
+	end
 
-		select top 1 [Id], [FirstName], [LastName]
-		from dbo.Guests
-		where FirstName = @firstName and LastName = @lastName;
-
+	select top 1 [Id], [FirstName], [LastName]
+	from dbo.Guests
+	where FirstName = @firstName and LastName = @lastName;
 end
+

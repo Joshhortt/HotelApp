@@ -9,7 +9,7 @@ begin
 	select r.*
 	from dbo.Rooms r
 	inner join dbo.RoomTypes t on t.Id = r.RoomTypeId
-	where r.RoomTypeId = @roomTypeId 
+	where r.RoomTypeId = @roomTypeId
 	and r.Id not in (
 	select b.RoomId
 	from dbo.Bookings b
